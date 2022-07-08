@@ -1,0 +1,7 @@
+.tmp/
+.cache/
+.git/
+.gitignore
+build/
+node_modules/
+data/

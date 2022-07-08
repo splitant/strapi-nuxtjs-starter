@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  strapi:
+    container_name: strapi
+    image: starter_strapi:16
+    build: backend
+    environment:
+      DATABASE_CLIENT: mysql
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_SSL: ${DATABASE_SSL}
+      NODE_ENV: ${NODE_ENV}
+    ports:
+      - 1337:1337
+    volumes:
+      - ./backend/config:/opt/app/config
+      - ./backend/src:/opt/app/src
+      - ./backend/package.json:/opt/package.json
+      - ./backend/yarn.lock:/opt/yarn.lock
+      - ./.env:/opt/app/.env
+    depends_on:
+      - db
+  
+  nuxt:
+    container_name: nuxt
+    image: starter_nuxt:16
+    build: frontend
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - strapi
+
+  db:
+    container_name: mysql
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USERNAME}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+    volumes:
+      - ./db:/var/lib/mysql

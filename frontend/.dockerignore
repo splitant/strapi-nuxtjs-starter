@@ -1,0 +1,5 @@
+.git
+.gitignore
+.nuxt
+node_modules
+tmp
