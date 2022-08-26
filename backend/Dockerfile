@@ -1,8 +1,11 @@
 FROM node:16
 
-RUN apt-get update
-
-RUN apt-get install libvips-dev vim -y
+RUN apt-get update && apt-get install -y \
+    libvips-dev \
+    vi \
+    git \
+    unzip \
+    wget
 
 ARG NODE_ENV=development
 

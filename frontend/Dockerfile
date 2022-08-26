@@ -2,7 +2,13 @@ FROM node:16
 
 RUN apt-get update
 
-RUN apt-get install vim -y
+RUN apt-get install vi git unzip -y
+
+RUN apt-get update && apt-get install -y \
+    vi \
+    git \
+    unzip \
+    wget
 
 ARG NODE_ENV=development
 

@@ -35,10 +35,11 @@ sudo docker exec -it nuxt bash
 
 ### Extra
 
-`vim` is installed by default on each container.
-
-It can be usefull if you want to check/edit file in container directly.
-
+Tools setted up by default in each container :
+- `vi`
+- `git`
+- `unzip`
+- `wget`
 
 ## Strapi Admin Panel
 
